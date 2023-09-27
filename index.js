@@ -60,3 +60,17 @@ app.delete('/movies/delete', (req, res) => {
   res.status(200).json({ status: 200, message: 'Movie deleted' });
 });
 
+app.get('/movies/read/by-date', (req, res) => {
+  const Date = [...movies].sort((a, b) => a.year - b.year);
+  res.status(200).json({ status: 200, data: Date });
+});
+
+app.get('/movies/read/by-rating', (req, res) => {
+  const Rating = [...movies].sort((a, b) => b.rating - a.rating);
+  res.status(200).json({ status: 200, data: Rating });
+});
+
+app.get('/movies/read/by-title', (req, res) => {
+  const Title = [...movies].sort((a, b) => a.title.localeCompare(b.title));
+  res.status(200).json({ status: 200, data: Title });
+});
