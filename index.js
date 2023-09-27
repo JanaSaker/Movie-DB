@@ -107,5 +107,4 @@ app.get('/movies/add', (req, res) => {
   }
 });
 let length=movies.length-1;
-console.log();
 
