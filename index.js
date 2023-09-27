@@ -38,3 +38,25 @@ app.get('/search', (req, res) => {
     res.status(500).json({ status: 500, error: true, message: 'You have to provide a search' });
   }
 });
+const movies = [
+  { title: 'Jaws', year: 1975, rating: 8 },
+  { title: 'Avatar', year: 2009, rating: 7.8 },
+  { title: 'Brazil', year: 1985, rating: 8 },
+  { title: 'الإرهاب والكباب‎', year: 1992, rating: 6.2 },
+];
+app.post('/movies/create', (req, res) => {
+  res.status(200).json({ status: 200, message: 'Movie created' });
+});
+
+app.get('/movies/read', (req, res) => {
+  res.status(200).json({ status: 200, data: movies });
+});
+
+app.put('/movies/update', (req, res) => {
+  res.status(200).json({ status: 200, message: 'Movie updated' });
+});
+
+app.delete('/movies/delete', (req, res) => {
+  res.status(200).json({ status: 200, message: 'Movie deleted' });
+});
+
