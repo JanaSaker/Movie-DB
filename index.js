@@ -74,3 +74,12 @@ app.get('/movies/read/by-title', (req, res) => {
   const Title = [...movies].sort((a, b) => a.title.localeCompare(b.title));
   res.status(200).json({ status: 200, data: Title });
 });
+
+app.get('/movies/read/:id?',(req,res)=>{
+  const {id} = req.params;
+  if(id > movies.length){
+     res.status(404).json({status:404, error:true, message:`the movie ${id} does not exist`});
+}
+else
+  res.status(200).json({status:200, data:movies[id-1]});
+})
