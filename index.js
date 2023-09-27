@@ -2,6 +2,7 @@ const express = require('express');
 const app = express();
 app.listen (3000);
 
+
 // Define a route that responds with "OK" for all incoming requests.
 app.get('/', (req, res) => {
   res.send('OK');
@@ -83,3 +84,28 @@ app.get('/movies/read/:id?',(req,res)=>{
 else
   res.status(200).json({status:200, data:movies[id-1]});
 })
+app.get('/movies/add', (req, res) => {
+  const title = req.query.title;
+  const year = req.query.year;
+  let rating = req.query.rating;
+
+  if (!title || !year || year.length !== 4 || isNaN(year)) {
+    res.status(403).json({
+      status: 403,
+      error: true,
+      message: 'Please write a title and a year.',
+    });
+  } else {
+    if (!rating || isNaN(rating)) {
+      rating = 4;
+    }
+
+    const newMovie = { title, year: parseInt(year), rating: parseFloat(rating) };
+    movies.push(newMovie);
+
+    res.status(200).json({ status: 200, data: movies });
+  }
+});
+let length=movies.length-1;
+console.log();
+
