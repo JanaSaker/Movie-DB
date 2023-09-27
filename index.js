@@ -93,7 +93,7 @@ app.get('/movies/add', (req, res) => {
     res.status(403).json({
       status: 403,
       error: true,
-      message: 'Please write a title and a year.',
+      message: 'you cannot create a movie without providing a title and a year',
     });
   } else {
     if (!rating || isNaN(rating)) {
@@ -108,3 +108,18 @@ app.get('/movies/add', (req, res) => {
 });
 let length=movies.length-1;
 
+app.delete('/movies/delete/:id', (req, res) => {
+  const movieId = parseInt(req.params.id);
+  const i = movies.findIndex((movie) => movie.id === movieId);
+
+  if (i!== -1) {
+    movies.splice(i, 1);
+    res.status(200).json({ status: 200, data: movies });
+  } else {
+    res.status(404).json({
+      status: 404,
+      error: true,
+      message: `The movie with ID ${movieId} does not exist`,
+    });
+  }
+});
